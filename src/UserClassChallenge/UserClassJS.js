@@ -10,7 +10,7 @@ class User {
     return `${this.Name} ${this.LastName}`;
   }
 
-  AddMascota(pet) {
+  AddPet(pet) {
     this.Pets.push(pet);
   }
 
@@ -30,7 +30,7 @@ const petFriends = ["Kokoro"];
 const Andy = new User("Andrés", "Espinoza", favoriteBooks, petFriends);
 
 console.log(Andy.GetFullName());
-Andy.AddMascota("Pan");
+Andy.AddPet("Pan");
 Andy.AddBook("La Insoportable Levedad del Ser", "Milan Kundera");
 console.log(Andy.GetBookNames());
 console.log(Andy.Pets);
