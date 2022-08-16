@@ -1,0 +1,22 @@
+Instalar Linter
+npm i -D eslint
+
+Configurar eslint
+npx eslint --init
+
+instalar prettier
+npm i -D prettier
+
+instalar configurador prettier
+npm i -D eslint-config-prettier
+
+En el archivo eslintrc.js se coloca en los extends el 'eslint-config-prettier'
+
+enlace: https://www.youtube.com/watch?v=3BHXuZvI4FI&t=43
+
+to run ts in node
+install
+npm install -g ts-node
+
+run
+ts-node-esm my_file.ts
