@@ -20,3 +20,10 @@ npm install -g ts-node
 
 run
 ts-node-esm my_file.ts
+
+Manejo de Paquetes
+
+Update Major.Minor.Patch -> "*1.0.0"
+Update X.Minor.Patch     -> "^1.0.0"
+Update X.X.Patch         -> "~1.0.0"
+Do not update            ->  "1.0.0"
