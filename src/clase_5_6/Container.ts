@@ -37,7 +37,7 @@ class Container {
     try{
       const products = await this.GetAll();
       const randomId = Math.floor(Math.random() * products.length);
-      return await this.GetById(randomId);
+      return await this.GetById(randomId || 1);
     }
     catch(error : any){
       console.error(error?.message);
