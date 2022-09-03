@@ -27,7 +27,7 @@ app.get('/productoRandom', async (_req, res) => {
   }
 });
 
-const PORT = 8081;
+const PORT = 8080;
 
 const server = app.listen(PORT, () => {
   console.log(`Listening port: ${PORT}`);
