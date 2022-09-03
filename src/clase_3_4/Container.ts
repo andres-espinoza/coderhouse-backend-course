@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-interface IProduct {
+export interface IProduct {
   title: string;
   price: number;
   thumbnail: string;
@@ -19,20 +19,19 @@ export const masaiYellow: IProduct = {
   thumbnail: 'https://cdnx.jumpseller.com/tienda-ruta-outdoor/image/7200677/resize/480/480?1657573189'
 }
 
-export const hiangle: IProduct = {
-  title: 'Zapatilla Escalada Hiangle',
-  price: 159990,
-  thumbnail: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/dd3da032976048bb95c7aafb003005a5_9366/Zapatillas_de_Escalada_Five_Ten_Hiangle_Blanco_EE9033_01_standard.jpg'
+const python: IProduct = {
+  title: 'Zapatilla Escalada Python',
+  price: 90990,
+  thumbnail: 'https://shop.epictv.com/en/climbing-shoes/la-sportiva/python-2015'
 }
-
 
 class Container {
   
   FileName : string;
 
-  private FilePath : string;
-
   private ProductID: number = 0;
+
+  private FilePath : string;
   
   constructor(fileName: string) {
     this.FileName = fileName;
@@ -81,18 +80,6 @@ class Container {
     };
   };
 
-  async GetRandomProduct() : Promise<IProduct | null> {
-    try{
-      const productsLength = await (await this.GetAll()).length;
-      const randomId = Math.floor(Math.random() * productsLength);
-      return await this.GetById(randomId);
-    }
-    catch(error : any){
-      console.error(error?.message);
-      return null;
-    }
-  };
-
   async GetAll() : Promise<IProduct[]> {
     try {
      return await this.GetProducts();
@@ -124,9 +111,6 @@ class Container {
   };
 };
 
-
-
-
 const ClimbingShoes = new Container('climbingShoes');
 
 //* ----------------- DEMO --------------------------
@@ -149,12 +133,9 @@ const ClimbingShoes = new Container('climbingShoes');
 //   .catch((error : any) => console.log(error?.message))
 //   .finally(() => console.log('Demo finalizada :)'))
 
-  ClimbingShoes
+ClimbingShoes
   .Save(mastia)
   .then(()=> ClimbingShoes.Save(masaiYellow))
-  .then(() => ClimbingShoes.Save(hiangle))
+  .then(()=> ClimbingShoes.Save(python))
   .catch((error : any) => console.log(error?.message))
-
-module.exports = {
-  ClimbingShoes
-};
+  .finally(() => console.log('Demo finalizada :)'))
