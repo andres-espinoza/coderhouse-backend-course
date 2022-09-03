@@ -1,6 +1,6 @@
 import express from 'express';
 
-const  { ClimbingShoes } = require('../clase_3_4/Container');
+const  { ClimbingShoes } = require('./src/clase_3_4/Container');
 
 const app = express();
 
