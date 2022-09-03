@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-interface IProduct {
+export interface IProduct {
   title: string;
   price: number;
   thumbnail: string;
@@ -19,20 +19,29 @@ const masaiYellow: IProduct = {
   thumbnail: 'https://cdnx.jumpseller.com/tienda-ruta-outdoor/image/7200677/resize/480/480?1657573189'
 }
 
+const python: IProduct = {
+  title: 'Zapatilla Escalada Python',
+  price: 90990,
+  thumbnail: 'https://shop.epictv.com/en/climbing-shoes/la-sportiva/python-2015'
+}
+
 class Container {
   
   FileName : string;
 
   private ProductID: number = 0;
+
+  private FilePath : string;
   
   constructor(fileName: string) {
-    this.FileName = `./${fileName}.json`;
-    fs.writeFileSync(this.FileName, '[]', 'utf8');
+    this.FileName = fileName;
+    this.FilePath = `../mockup_data/${this.FileName}.json`;
+    fs.writeFileSync(this.FilePath, '[]', 'utf8');
   };
 
   private GetProducts(): Promise<IProduct[]> {
     return fs.promises
-      .readFile(this.FileName)
+      .readFile(this.FilePath)
       .then((file : any) => JSON.parse(file) as IProduct[])
       .catch((error : any) => error);
   };
@@ -41,7 +50,7 @@ class Container {
     const newProductsJSON = JSON.stringify(products);
     return fs
       .promises
-      .writeFile(this.FileName, newProductsJSON, 'utf8');
+      .writeFile(this.FilePath, newProductsJSON, 'utf8');
   };
 
   async Save(product: IProduct) : Promise<number | null> {
@@ -94,7 +103,7 @@ class Container {
 
   async DeleteAll() : Promise<void> {
     try {
-      await fs.promises.writeFile(this.FileName, '[]', 'utf8');
+      await fs.promises.writeFile(this.FilePath, '[]', 'utf8');
     }
     catch (error : any) {
       console.error(error?.message);
@@ -102,26 +111,30 @@ class Container {
   };
 };
 
+const ClimbingShoes = new Container('climbingShoes');
 
 //* ----------------- DEMO --------------------------
 
+// ClimbingShoes
+//   .Save(mastia)
+//   .then(()=> ClimbingShoes.Save(masaiYellow))
+//   .then(() => ClimbingShoes.GetAll())
+//   .then((prods) => console.log('Estos son todos los productos: ', prods))
+//   .then(() => ClimbingShoes.GetById(2))
+//   .then((prod) => console.log('Producto con ID 2: ', prod))
+//   .then(() => ClimbingShoes.DeleteById(2))
+//   .then(() => console.log('El Producto con ID 2 ha sido eliminado'))
+//   .then(() => ClimbingShoes.GetById(2))
+//   .then((prod) => console.log('Buscando producto con ID 2: ', prod))
+//   .then(() => ClimbingShoes.DeleteAll())
+//   .then(() => console.log('Productos eliminados!'))
+//   .then(() => ClimbingShoes.GetAll())
+//   .then((prods) => console.log('Ya no hay productos: ', prods))
+//   .catch((error : any) => console.log(error?.message))
+//   .finally(() => console.log('Demo finalizada :)'))
 
-const ClimbingShoes = new Container('climbingShoes');
-
-ClimbingShoes
+  ClimbingShoes
   .Save(mastia)
   .then(()=> ClimbingShoes.Save(masaiYellow))
-  .then(() => ClimbingShoes.GetAll())
-  .then((prods) => console.log('Estos son todos los productos: ', prods))
-  .then(() => ClimbingShoes.GetById(2))
-  .then((prod) => console.log('Producto con ID 2: ', prod))
-  .then(() => ClimbingShoes.DeleteById(2))
-  .then(() => console.log('El Producto con ID 2 ha sido eliminado'))
-  .then(() => ClimbingShoes.GetById(2))
-  .then((prod) => console.log('Buscando producto con ID 2: ', prod))
-  .then(() => ClimbingShoes.DeleteAll())
-  .then(() => console.log('Productos eliminados!'))
-  .then(() => ClimbingShoes.GetAll())
-  .then((prods) => console.log('Ya no hay productos: ', prods))
+  .then(()=> ClimbingShoes.Save(python))
   .catch((error : any) => console.log(error?.message))
-  .finally(() => console.log('Demo finalizada :)'))
