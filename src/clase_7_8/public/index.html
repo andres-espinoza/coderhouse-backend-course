@@ -4,9 +4,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Products Form</title>
 </head>
 <body>
-  <h1>HOLA</h1>
+  <h2>Hello There!</h2>
+  <h3>Please enter your product</h3>
+  <br>
+  <form action="/api/products" method="post">
+    <input type="text"name="title" id="title" placeholder="Product Title" required>
+    <input type="number" name="price" id="price" placeholder="Price" required>
+    <input type="text" name="thumbnail" id="thumbnail" placeholder="URL Thumbnail" required>
+    <input type="submit" value="Send Product">
+  </form>
 </body>
 </html>

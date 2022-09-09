@@ -6,9 +6,11 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '/public')));
+app.use('/api/products', express.static(path.join(__dirname, '/public')));
 
-
+app.use('/', (_req, res) => {
+  res.send('<h1>Welcome to the Api Products<h1/>')
+})
 app.use('/api/products', productsRoute);
 
 const PORT = process.env.PORT || 8080;
