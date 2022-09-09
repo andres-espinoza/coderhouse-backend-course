@@ -1,4 +1,5 @@
-import { IProduct } from '../clase_3_4/Container';
+import { IProduct } from '../clase_3_4/sample';
+
 
 const fs = require('fs');
 
