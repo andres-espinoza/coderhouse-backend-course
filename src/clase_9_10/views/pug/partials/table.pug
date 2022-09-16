@@ -1,0 +1,17 @@
+h2 Product List
+table
+  thead
+    tr
+      th Product
+      th Price
+      th Image
+  tbody
+    each p in product
+      tr
+        th(class="table_product_name") #{p.title}
+        td #{p.price}
+        td(class="table_cell_image")
+          img(
+            class="table_image"
+            src=p.thumbnail
+            alt="product-image")

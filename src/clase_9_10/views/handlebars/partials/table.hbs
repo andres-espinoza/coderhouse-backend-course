@@ -1,0 +1,24 @@
+<h2>Product List</h2>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Product</th>
+      <th scope="col">Price</th>
+      <th scope="col">Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.product}}
+      <tr>
+        <th scope="row" class="table_product_name">{{this.title}}</th>
+        <td>{{this.price}}</td>
+        <td class="table_cell_image">
+          <img
+            class="table_image"
+            src={{{this.thumbnail}}}
+            alt="product-image">
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

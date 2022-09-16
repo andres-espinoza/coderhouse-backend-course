@@ -1,0 +1,24 @@
+<h2>Product List</h2>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Product</th>
+      <th scope="col">Price</th>
+      <th scope="col">Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(p of product) { %>
+      <tr>
+        <th scope="row" class="table_product_name"><%= p.title %></th>
+        <td><%= p.price %></td>
+        <td class="table_cell_image">
+          <img
+            class="table_image"
+            src=<%= p.thumbnail %>
+            alt="product-image">
+        </td>
+      </tr>
+    <% }; %>
+  </tbody>
+</table>

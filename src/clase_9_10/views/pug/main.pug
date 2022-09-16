@@ -1,0 +1,8 @@
+include layouts/index.pug
+div(class="container")
+  section
+    if product
+      include partials/table.pug
+    else
+    h2 There is no products yet!
+    a(href="/") Product Form
