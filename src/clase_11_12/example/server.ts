@@ -16,10 +16,10 @@ socketServer.on('connection', (client) => {
   console.log(client.id);
   client.on('disconnect', () => console.log('Disconnected Client'));
   client.on('mensaje', (mensaje) => {
-    console.log('Mensaje recibido: ', mensaje)
+    console.log('Mensaje recibido: ', mensaje);
     client.emit('respuesta', 'agradecido');
   });
 });
 
-const PORT =  process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => console.log(`Http Server listening port: ${PORT}`));

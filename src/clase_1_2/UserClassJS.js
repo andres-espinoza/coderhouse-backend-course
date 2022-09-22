@@ -25,12 +25,12 @@ class User {
 
 const favoriteBooks = require('./favoriteBooks');
 
-const petFriends = ["Kokoro"];
+const petFriends = ['Kokoro'];
 
-const Andy = new User("Andrés", "Espinoza", favoriteBooks, petFriends);
+const Andy = new User('Andrés', 'Espinoza', favoriteBooks, petFriends);
 
 console.log(Andy.GetFullName());
-Andy.AddPet("Pan");
-Andy.AddBook("La Insoportable Levedad del Ser", "Milan Kundera");
+Andy.AddPet('Pan');
+Andy.AddBook('La Insoportable Levedad del Ser', 'Milan Kundera');
 console.log(Andy.GetBookNames());
 console.log(Andy.Pets);

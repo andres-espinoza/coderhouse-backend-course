@@ -3,90 +3,81 @@ import { IProduct, masaiYellow, mastia, python } from './sample';
 const fs = require('fs');
 
 class Container {
-  
-  FileName : string;
+  FileName: string;
 
   private ProductID: number = 0;
 
-  private FilePath : string;
-  
+  private FilePath: string;
+
   constructor(fileName: string) {
     this.FileName = fileName;
     this.FilePath = `../mockup_data/${this.FileName}.json`;
     fs.writeFileSync(this.FilePath, '[]', 'utf8');
-  };
+  }
 
   private GetProducts(): Promise<IProduct[]> {
     return fs.promises
       .readFile(this.FilePath)
-      .then((file : any) => JSON.parse(file) as IProduct[])
-      .catch((error : any) => error);
-  };
+      .then((file: any) => JSON.parse(file) as IProduct[])
+      .catch((error: any) => error);
+  }
 
-  private SaveJSONProductsInFile(products : IProduct[]) : Promise<void> {
+  private SaveJSONProductsInFile(products: IProduct[]): Promise<void> {
     const newProductsJSON = JSON.stringify(products);
-    return fs
-      .promises
-      .writeFile(this.FilePath, newProductsJSON, 'utf8');
-  };
+    return fs.promises.writeFile(this.FilePath, newProductsJSON, 'utf8');
+  }
 
-  async Save(product: IProduct) : Promise<number | null> {
+  async Save(product: IProduct): Promise<number | null> {
     try {
       const products = await this.GetProducts();
-      this.ProductID+=1;
-      products.push({ ...product, id: this.ProductID});
+      this.ProductID += 1;
+      products.push({ ...product, id: this.ProductID });
       await this.SaveJSONProductsInFile(products);
       return this.ProductID;
-    }
-    catch(error : any) {
+    } catch (error: any) {
       console.error(error?.message);
       return null;
-    };
-  };
+    }
+  }
 
-  async GetById(id : number) : Promise<IProduct | null> {
+  async GetById(id: number): Promise<IProduct | null> {
     try {
       const products = await this.GetProducts();
       const product = products.find((prod) => prod.id === id);
-      return (product || null);
-
-    }
-    catch(error : any) {
+      return product || null;
+    } catch (error: any) {
       console.error(error?.message);
       return null;
-    };
-  };
-
-  async GetAll() : Promise<IProduct[]> {
-    try {
-     return await this.GetProducts();
     }
-    catch(error : any) {
+  }
+
+  async GetAll(): Promise<IProduct[]> {
+    try {
+      return await this.GetProducts();
+    } catch (error: any) {
       console.error(error?.message);
       return [];
-    };
-  };
+    }
+  }
 
-  async DeleteById(id : number) : Promise<void> {
+  async DeleteById(id: number): Promise<void> {
     try {
       const products = await this.GetProducts();
       const filteredProducts = products.filter((prod) => prod.id !== id);
       await this.SaveJSONProductsInFile(filteredProducts);
-    }
-    catch(error : any) {
+    } catch (error: any) {
       console.error(error?.message);
-    };
-  };
+    }
+  }
 
-  async DeleteAll() : Promise<void> {
+  async DeleteAll(): Promise<void> {
     try {
       await fs.promises.writeFile(this.FilePath, '[]', 'utf8');
-    }
-    catch (error : any) {
+    } catch (error: any) {
       console.error(error?.message);
-    };
-  };
-};
+    }
+  }
+}
 
 const ClimbingShoes = new Container('climbingShoes');
 
@@ -110,9 +101,8 @@ const ClimbingShoes = new Container('climbingShoes');
 //   .catch((error : any) => console.log(error?.message))
 //   .finally(() => console.log('Demo finalizada :)'))
 
-ClimbingShoes
-  .Save(mastia)
-  .then(()=> ClimbingShoes.Save(masaiYellow))
-  .then(()=> ClimbingShoes.Save(python))
-  .catch((error : any) => console.log(error?.message))
-  .finally(() => console.log('Demo finalizada :)'))
+ClimbingShoes.Save(mastia)
+  .then(() => ClimbingShoes.Save(masaiYellow))
+  .then(() => ClimbingShoes.Save(python))
+  .catch((error: any) => console.log(error?.message))
+  .finally(() => console.log('Demo finalizada :)'));

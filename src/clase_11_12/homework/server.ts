@@ -16,8 +16,8 @@ const hbs = create({
   extname: '.hbs',
   defaultLayout: 'index.hbs',
   layoutsDir: path.join(__dirname, '/views/handlebars/layouts'),
-  partialsDir: path.join(__dirname, '/views/handlebars/partials')
-})
+  partialsDir: path.join(__dirname, '/views/handlebars/partials'),
+});
 
 app.engine('hbs', hbs.engine);
 app.set('views', path.join(__filename, '..', 'views', 'handlebars'));
@@ -30,5 +30,5 @@ socketServer.on('connection', (client: Socket) => {
   client.on('chatMessage', (msg) => console.log(msg));
 });
 
-const PORT =  process.env.PORT || 3000;
-httpServer.listen(PORT, () => console.log(`Http Server listening port: ${PORT}`));  
+const PORT = process.env.PORT || 8080;
+httpServer.listen(PORT, () => console.log(`Http Server listening port: http://localhost:${PORT}`));

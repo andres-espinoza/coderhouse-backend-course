@@ -12,8 +12,7 @@ route.get('/', (_req, res) => {
     // else res.status(200).render('main', { product: false });
     //* EJS
     res.status(200).render('ejs/main', { product: [...prods] });
-    
-  } catch(error : any) {
+  } catch (error: any) {
     res.sendStatus(500);
   }
 });
@@ -21,46 +20,44 @@ route.get('/', (_req, res) => {
 route.get('/:id', (req, res) => {
   try {
     const { id } = req.params;
-    const prod = products.GetProductById(Number(id)); 
-    res.status(200).send(prod)
-  } catch(error : any) {
+    const prod = products.GetProductById(Number(id));
+    res.status(200).send(prod);
+  } catch (error: any) {
     res.sendStatus(500);
   }
 });
 
 route.post('/', (req, res) => {
   try {
-    const newProduct : IProduct = req.body;
+    const newProduct: IProduct = req.body;
     newProduct.price = Number(newProduct.price);
     const addedProduct = products.AddProduct(newProduct);
     console.log('Post Message: ', addedProduct);
-    res.status(200).redirect('/'); 
-  } catch(error : any) {
+    res.status(200).redirect('/');
+  } catch (error: any) {
     res.sendStatus(500);
   }
 });
 
 route.put('/:id', (req, res) => {
   try {
-    const { title, price, thumbnail } : IProduct = req.body;
+    const { title, price, thumbnail }: IProduct = req.body;
     const { id } = req.params;
     const updatedProduct = products.UpdateProduct({ title, price, thumbnail }, Number(id));
     res.status(200).send(updatedProduct);
-
-  } catch(error : any) {
+  } catch (error: any) {
     res.sendStatus(500);
   }
-})
+});
 
 route.delete('/:id', (req, res) => {
   try {
     const { id } = req.params;
     const deleteProduct = products.DeleteProductById(Number(id));
     res.status(200).send(deleteProduct);
-
-  } catch(error : any) {
+  } catch (error: any) {
     res.sendStatus(500);
   }
-})
+});
 
 export default route;

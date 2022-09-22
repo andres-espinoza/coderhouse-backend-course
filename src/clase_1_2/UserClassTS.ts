@@ -1,4 +1,4 @@
-interface IBooks {
+export interface IBooks {
   name: String;
   author: String;
 }
@@ -38,12 +38,12 @@ class User {
 
 const favoriteBooks: IBooks[] = require('./favoriteBooks');
 
-const petFriends: String[] = ["Kokoro"];
+const petFriends: String[] = ['Kokoro'];
 
-const Andy: User = new User("Andrés", "Espinoza", favoriteBooks, petFriends);
+const Andy: User = new User('Andrés', 'Espinoza', favoriteBooks, petFriends);
 
 console.log(Andy.GetFullName());
-Andy.AddPet("Pan");
-Andy.AddBook("La Insoportable Levedad del Ser", "Milan Kundera");
+Andy.AddPet('Pan');
+Andy.AddBook('La Insoportable Levedad del Ser', 'Milan Kundera');
 console.log(Andy.GetBookNames());
 console.log(Andy.Pets);
