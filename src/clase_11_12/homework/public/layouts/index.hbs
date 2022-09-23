@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   <script type="text/javascript" src="./prods.js" defer></script>
+
+  <title>Handlebars</title>
+</head>
+<body>
+  <div class="container">
+    <section>
+      <h1>Hello There!</h1>
+      <h2>Please enter your product</h2>
+      <form id="product-form">
+        <input type="text"name="title" id="product-title" placeholder="Product Title" required>
+        <input type="number" name="price" id="product-price" placeholder="Price" required>
+        <input type="text" name="thumbnail" id="product-thumbnail" placeholder="URL Thumbnail" required>
+        <input type="submit" class="submit" value="Send Product">
+      </form>
+    </section>
+
+    <section>
+        <h2>Product List</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Image</th>
+            </tr>
+          </thead>
+          <tbody class="output">
+          </tbody>
+        </table>
+    </section>
+  </div>
+    <script type="text/x-handlebars-template" id="products-table-template">
+      {{#each products}}
+        <tr>
+          <th class="table_product_name">{{this.title}}</th>
+          <td>{{this.price}}</td>
+          <td>{{this.id}}</td>
+          <td class="table_cell_image">
+            <img
+              class="table_image"
+              src={{{this.thumbnail}}}
+              alt="product-image">
+          </td>
+        </tr>
+      {{/each}}
+    </script>
+</body>
+</html>
